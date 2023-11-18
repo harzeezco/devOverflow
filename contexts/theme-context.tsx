@@ -4,7 +4,6 @@
 
 import React, {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -32,23 +31,20 @@ export function ThemeContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [mode, setMode] = useState('');
+  const [mode, setMode] = useState('light');
 
   const modeState = useMemo(() => ({ mode, setMode }), [mode]);
 
-  const handleChangeMode = useCallback(() => {
-    if (mode === 'dark') {
-      setMode('light');
-      document.documentElement.classList.add('light');
-    } else {
+  const handleThemeChange = () => {
+    if (mode === 'light') {
       setMode('dark');
       document.documentElement.classList.add('dark');
     }
-  }, [mode]);
+  };
 
   useEffect(() => {
-    handleChangeMode();
-  }, []);
+    handleThemeChange();
+  }, [mode]);
 
   return (
     <ThemeContext.Provider value={modeState}>{children}</ThemeContext.Provider>
