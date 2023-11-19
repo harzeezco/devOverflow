@@ -9,6 +9,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "jsx-quotes": ["error", "prefer-single"]
+    "jsx-quotes": ["error", "prefer-single"],
+    "import/no-cycle": [1, { "maxDepth": 1 }]
   }
 }

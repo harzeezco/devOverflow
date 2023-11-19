@@ -18,7 +18,7 @@ function ImageWrapper({
 }: ImageWrapperProp) {
   const modeState = useTheme();
 
-  const imageSrc = modeState?.mode === 'light' ? src : srcForDarkMode;
+  const imageSrc = modeState?.theme === 'light' ? src : srcForDarkMode;
 
   return <Image src={imageSrc!} alt={alt} {...props} />;
 }

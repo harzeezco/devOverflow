@@ -3,8 +3,17 @@
 @tailwind utilities;
 @import url('../styles/theme.css');
 
+html {
+  scrollbar-width: none;
+}
+
 body {
   font-family: 'Inter', sans-serif;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
 
 @layer utilities {

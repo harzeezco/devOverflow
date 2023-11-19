@@ -11,8 +11,8 @@ import React, {
 } from 'react';
 
 interface ThemeContextProp {
-  mode: string;
-  setMode: (value: string) => void;
+  theme: string;
+  setTheme: (value: string) => void;
 }
 export const ThemeContext = createContext<ThemeContextProp | null>(null);
 
@@ -31,22 +31,29 @@ export function ThemeContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [mode, setMode] = useState('light');
+  const [theme, setTheme] = useState('light');
 
-  const modeState = useMemo(() => ({ mode, setMode }), [mode]);
+  const themeState = useMemo(() => ({ theme, setTheme }), [theme]);
 
   const handleThemeChange = () => {
-    if (mode === 'light') {
-      setMode('dark');
+    if (
+      localStorage.theme === 'dark'
+      || (!('theme' in localStorage)
+        && window.matchMedia('prefers-color-scheme: dark').matches)
+    ) {
+      setTheme('dark');
       document.documentElement.classList.add('dark');
+    } else {
+      setTheme('light');
+      document.documentElement.classList.remove('dark');
     }
   };
 
   useEffect(() => {
     handleThemeChange();
-  }, [mode]);
+  }, [theme]);
 
   return (
-    <ThemeContext.Provider value={modeState}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={themeState}>{children}</ThemeContext.Provider>
   );
 }
