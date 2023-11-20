@@ -36,8 +36,17 @@ export function ThemeContextProvider({
   const modeState = useMemo(() => ({ mode, setMode }), [mode]);
 
   const handleThemeChange = () => {
+<<<<<<< Updated upstream
     if (mode === 'light') {
       setMode('dark');
+=======
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('prefers-color-scheme: dark').matches)
+    ) {
+      setTheme('dark');
+>>>>>>> Stashed changes
       document.documentElement.classList.add('dark');
     }
   };
