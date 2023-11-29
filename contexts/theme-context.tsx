@@ -37,9 +37,9 @@ export function ThemeContextProvider({
 
   const handleThemeChange = () => {
     if (
-      localStorage.theme === 'dark'
-      || (!('theme' in localStorage)
-        && window.matchMedia('prefers-color-scheme: dark').matches)
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('prefers-color-scheme: dark').matches)
     ) {
       setTheme('dark');
       document.documentElement.classList.add('dark');
