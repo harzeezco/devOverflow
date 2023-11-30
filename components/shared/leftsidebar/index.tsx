@@ -13,7 +13,7 @@ function LeftSideNav() {
   const pathname = usePathname();
 
   return (
-    <aside className='background-light900_dark200 sticky flex h-screen flex-col gap-4 overflow-y-auto px-6 pt-10 shadow-light-300 dark:shadow-none max-sm:hidden'>
+    <aside className='background-light900_dark200 custom-scrollbar sticky z-10 flex h-screen flex-col gap-4 overflow-y-auto px-6 pb-8 pt-32 shadow-light-300 dark:shadow-none max-sm:hidden'>
       <div>
         {sidebarLinks.map((details) => {
           const isActive =
@@ -40,7 +40,7 @@ function LeftSideNav() {
                 />
                 <p
                   className={
-                    (cn(isActive ? 'base-bold' : 'base-medium'),
+                    (cn(isActive ? 'font-bold' : 'font-medium'),
                     'max-lg:hidden')
                   }
                 >
