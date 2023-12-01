@@ -28,7 +28,7 @@ function MobileDrawer() {
       </SheetTrigger>
       <SheetContent
         side='left'
-        className='background-light900_dark200 overflow-y-auto border-none'
+        className='background-light900_dark200 custom-scrollbar overflow-y-auto border-none'
       >
         <Logo className='h2-bold text-dark100_light900 font-spaceGrotesk' />
         <div>

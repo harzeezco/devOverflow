@@ -70,7 +70,7 @@ const POPULAR_TAGS = [
 
 function RightSidebar() {
   return (
-    <div className='background-light900_dark200 custom-scrollbar sticky flex h-screen flex-col gap-4 overflow-y-auto px-6 pt-32 shadow-light-300 dark:shadow-none max-lg:hidden'>
+    <div className='background-light900_dark200 custom-scrollbar sticky hidden h-screen max-w-[330px] flex-col gap-4 overflow-y-auto px-6 pt-32 shadow-light-300 dark:shadow-none lg:flex'>
       <div>
         <h2 className='text-dark400_light900 mb-3 font-inter text-xl font-bold'>
           Hot Network
@@ -95,14 +95,14 @@ function RightSidebar() {
 
       <div>
         <h2 className='text-dark400_light900 mb-3 font-inter text-xl font-bold'>
-          Hot Network
+          Popular Tag
         </h2>
         <ul className='grid gap-4 pb-10'>
           {POPULAR_TAGS.map((details) => (
             <li className='flex items-center justify-between rounded-lg'>
               <button
                 type='button'
-                className='btn-tertiary text-dark500_light500 px-3 py-2 text-sm font-medium'
+                className='btn-tertiary text-dark500_light500 rounded-md px-3 py-2 text-sm font-medium'
               >
                 {details.tag}
               </button>
