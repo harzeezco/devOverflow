@@ -73,13 +73,13 @@ function RightSidebar() {
     <div className='background-light900_dark200 custom-scrollbar sticky hidden h-screen max-w-[330px] flex-col gap-4 overflow-y-auto px-6 pt-32 shadow-light-300 dark:shadow-none lg:flex'>
       <div>
         <h2 className='text-dark400_light900 mb-3 font-inter text-xl font-bold'>
-          Hot Network
+          Popular Questions
         </h2>
         <ul className='grid gap-4 pb-8'>
           {POPULAR_QUESTIONS.map((details) => (
             <li
               key={details.id}
-              className='text-dark500_light700 flex items-center gap-3'
+              className='text-dark500_light700 line-clamp-1 flex items-center gap-3'
             >
               {details.title}
               <Image
