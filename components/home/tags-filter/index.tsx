@@ -1,7 +1,13 @@
 import React from 'react';
 import cn from '@/lib/utils';
 
-function TagsFilter({ active = '', value = '' }) {
+function TagsFilter({
+  active = '',
+  value = '',
+}: {
+  active?: String;
+  value: String;
+}) {
   return (
     <li>
       <button
@@ -18,5 +24,9 @@ function TagsFilter({ active = '', value = '' }) {
     </li>
   );
 }
+
+TagsFilter.defaultProps = {
+  active: '',
+};
 
 export default TagsFilter;

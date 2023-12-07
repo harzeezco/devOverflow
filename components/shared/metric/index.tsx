@@ -1,5 +1,6 @@
-import cn from '@/lib/utils';
+import cn, { formatNumber } from '@/lib/utils';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 function Metric({
@@ -13,14 +14,16 @@ function Metric({
 }: {
   imgSrc: string;
   alt: string;
-  value: string;
+  value: number | string;
   href?: string;
   textStyles?: string;
   isAuthor?: boolean;
   title: string;
 }) {
-  return (
-    <div className='flex-center flex-wrap gap-1'>
+  const valueFormat = typeof value === 'string';
+
+  const MetricContent = (
+    <>
       <Image
         src={imgSrc}
         alt={alt}
@@ -29,11 +32,28 @@ function Metric({
         className={cn('object-contain', href ? 'rounded-full' : '')}
       />
       <p className={cn(textStyles, 'flex items-center gap-1')}>
-        {value}
-        {title}
+        <span>{valueFormat ? value : formatNumber(value)}</span>
+
+        <span
+          className={`small-regular line-clamp-1 ${
+            isAuthor ? 'max-sm:hidden' : ''
+          }`}
+        >
+          {title}
+        </span>
       </p>
-    </div>
+    </>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className='flex-center gap-1'>
+        {MetricContent}
+      </Link>
+    );
+  }
+
+  return <div className='flex-center flex-wrap gap-1'>{MetricContent}</div>;
 }
 
 Metric.defaultProps = {

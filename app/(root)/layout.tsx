@@ -9,7 +9,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       <Header />
       <main className='grid gap-7 max-lg:grid-cols-[auto_1fr] max-sm:grid-cols-1 lg:grid-cols-[auto_1fr_auto]'>
         <LeftSideNav />
-        <section className='flex min-h-screen flex-1 flex-col px-6 pb-6 pt-36 max-md:pb-14'>
+        <section className='flex min-h-screen flex-1 flex-col p-6 pb-6 pt-36 max-md:pb-14'>
           <div className='mx-auto w-full max-w-5xl'>{children}</div>
         </section>
         <RightSidebar />

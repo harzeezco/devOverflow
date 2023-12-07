@@ -70,7 +70,7 @@ const POPULAR_TAGS = [
 
 function RightSidebar() {
   return (
-    <div className='background-light900_dark200 custom-scrollbar sticky hidden h-screen max-w-[330px] flex-col gap-4 overflow-y-auto px-6 pt-32 shadow-light-300 dark:shadow-none lg:flex'>
+    <div className='background-light900_dark200 custom-scrollbar sticky inset-y-0 right-0 hidden h-screen max-w-[330px] flex-col gap-4 overflow-y-auto px-6 pt-32 shadow-light-300 dark:shadow-none lg:flex'>
       <div>
         <h2 className='text-dark400_light900 mb-3 font-inter text-xl font-bold'>
           Popular Questions

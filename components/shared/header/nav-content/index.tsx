@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import { sidebarLinks } from '@/lib/data';
