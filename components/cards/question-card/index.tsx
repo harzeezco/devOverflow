@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
+import React from 'react';
 import TagsFilter from '@/components/home/tags-filter';
 import Metric from '@/components/shared/metric';
-import { getTimestamp } from '@/lib/utils';
 import Link from 'next/link';
-import React from 'react';
+import { getTimestamp, metricsData } from '@/lib/utils';
 
 type QuestionProps = {
   id: string;
@@ -33,44 +33,7 @@ function QuestionCard({
   answers,
   createdAt,
 }: QuestionProps) {
-  const metrics = [
-    {
-      imgSrc: '/assets/icons/avatar.svg',
-      alt: 'user',
-      title: ' - asked 1 hour ago',
-      value: author.name,
-      href: `/profile/${author._id}`,
-      textStyles: 'body-mediumv text-dark400_light700',
-      isAuthor: true,
-    },
-    {
-      imgSrc: '/assets/icons/like.svg',
-      alt: 'Upvotes',
-      title: 'votes',
-      value: upvotes,
-      href: '',
-      textStyles: 'small-medium text-dark400_light800',
-      isAuthor: false,
-    },
-    {
-      imgSrc: '/assets/icons/message.svg',
-      alt: 'message',
-      title: 'Answers',
-      value: answers.length,
-      href: '',
-      textStyles: 'small-medium text-dark400_light800',
-      isAuthor: false,
-    },
-    {
-      imgSrc: '/assets/icons/eye.svg',
-      alt: 'eye',
-      title: 'Views',
-      value: views,
-      href: '',
-      textStyles: 'small-medium text-dark400_light800',
-      isAuthor: false,
-    },
-  ];
+  const getMetrics = metricsData(author, upvotes, answers, views);
 
   return (
     <div className='card-wrapper rounded-[10px] px-7 py-6 sm:px-5'>
@@ -94,7 +57,7 @@ function QuestionCard({
       </ul>
 
       <div className='flex-between mt-6 w-full gap-1'>
-        {metrics.map((details) => (
+        {getMetrics.map((details) => (
           <Metric key={details.title} {...details} />
         ))}
       </div>

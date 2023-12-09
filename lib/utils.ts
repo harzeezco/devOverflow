@@ -1,8 +1,55 @@
+/* eslint-disable no-underscore-dangle */
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 export default function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+export function metricsData(
+  author: { name: string; _id: string },
+  upvotes: number,
+  answers: {}[],
+  views: number,
+) {
+  return [
+    {
+      imgSrc: '/assets/icons/avatar.svg',
+      alt: 'user',
+      title: ' - asked 1 hour ago',
+      value: author.name,
+      href: `/profile/${author._id}`,
+      textStyles: 'body-mediumv text-dark400_light700',
+      isAuthor: true,
+    },
+    {
+      imgSrc: '/assets/icons/like.svg',
+      alt: 'Upvotes',
+      title: 'votes',
+      value: upvotes,
+      href: '',
+      textStyles: 'small-medium text-dark400_light800',
+      isAuthor: false,
+    },
+    {
+      imgSrc: '/assets/icons/message.svg',
+      alt: 'message',
+      title: 'Answers',
+      value: answers.length,
+      href: '',
+      textStyles: 'small-medium text-dark400_light800',
+      isAuthor: false,
+    },
+    {
+      imgSrc: '/assets/icons/eye.svg',
+      alt: 'eye',
+      title: 'Views',
+      value: views,
+      href: '',
+      textStyles: 'small-medium text-dark400_light800',
+      isAuthor: false,
+    },
+  ];
 }
 
 export const getTimestamp = (createdAt: Date): string => {

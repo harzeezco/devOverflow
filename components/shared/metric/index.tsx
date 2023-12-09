@@ -20,7 +20,7 @@ function Metric({
   isAuthor?: boolean;
   title: string;
 }) {
-  const valueFormat = typeof value === 'string';
+  const isValueStringType = typeof value === 'string';
 
   const MetricContent = (
     <>
@@ -32,7 +32,7 @@ function Metric({
         className={cn('object-contain', href ? 'rounded-full' : '')}
       />
       <p className={cn(textStyles, 'flex items-center gap-1')}>
-        <span>{valueFormat ? value : formatNumber(value)}</span>
+        <span>{isValueStringType ? value : formatNumber(value)}</span>
 
         <span
           className={`small-regular line-clamp-1 ${
