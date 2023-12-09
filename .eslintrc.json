@@ -12,6 +12,7 @@
     "jsx-quotes": ["error", "prefer-single"],
     "import/no-cycle": [1, { "maxDepth": 1 }],
     "react/jsx-props-no-spreading": "off",
-    "no-return-assign": "off"
+    "no-return-assign": "off",
+    "no-nested-ternary": "off"
   }
 }
