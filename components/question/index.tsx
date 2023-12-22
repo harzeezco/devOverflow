@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 /* eslint-disable react/jsx-one-expression-per-line */
 
 'use client';
@@ -38,7 +39,7 @@ function Question() {
   });
 
   function handleTagsInputValue(
-    e: React.KeyboardEvent<HTMLInputElement>,
+    c
     field: any,
   ) {
     if (e.key === 'Enter') {
@@ -76,6 +77,10 @@ function Question() {
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof QuestionSchema>) {
     setIsSubmitting(true);
+    try {
+    } catch (error) {
+    } finally {
+    }
   }
   return (
     <Form {...form}>
