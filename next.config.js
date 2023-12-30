@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverActions: {
-      allowedOrigins: ['my-proxy.com'],
-    },
+    serverActions: true,
+    mdxRs: true,
+    serverComponentsExternalPackages: ['mongoose'],
   },
 };
 

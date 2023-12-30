@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/form';
 import { QuestionSchema } from '@/lib/validations';
 import Image from 'next/image';
+import { createQuestion } from '@/lib/actions/question.action';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
@@ -38,10 +39,7 @@ function Question() {
     },
   });
 
-  function handleTagsInputValue(
-    c
-    field: any,
-  ) {
+  function handleTagsInputValue(e, field: any) {
     if (e.key === 'Enter') {
       e.preventDefault();
 
@@ -75,11 +73,13 @@ function Question() {
   }
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof QuestionSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionSchema>) {
     setIsSubmitting(true);
     try {
+      await createQuestion({});
     } catch (error) {
     } finally {
+      setIsSubmitting(false);
     }
   }
   return (
@@ -112,7 +112,7 @@ function Question() {
         />
         <FormField
           control={form.control}
-          name='title'
+          name='explanation'
           render={({ field }) => (
             <FormItem>
               <FormLabel className='paragraph-semibold text-dark400_light800'>
@@ -123,6 +123,8 @@ function Question() {
                 <Editor
                   apiKey={process.env.NEXT_PUBLIC_TINY_API_KEY}
                   onInit={(_evt, editor) => (editorRef.current = editor)}
+                  onBlur={field.onBlur}
+                  onEditorChange={(content) => field.onChange(content)}
                   init={{
                     height: 350,
                     menubar: false,
