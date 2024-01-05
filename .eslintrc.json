@@ -14,6 +14,10 @@
     "react/jsx-props-no-spreading": "off",
     "no-return-assign": "off",
     "no-nested-ternary": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-underscore-dangle": "off",
+    "no-restricted-syntax": "off",
+    "no-await-in-loop": "off",
+    "object-curly-newline": "off"
   }
 }

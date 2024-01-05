@@ -1,12 +1,9 @@
-/* eslint-disable no-empty */
-/* eslint-disable react/jsx-one-expression-per-line */
-
 'use client';
 
 import React, { useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useForm, FieldPath } from 'react-hook-form';
 import * as z from 'zod';
 import {
   Form,
@@ -18,17 +15,25 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { QuestionSchema } from '@/lib/validations';
+import createQuestion from '@/lib/actions/question-action';
 import Image from 'next/image';
-import { createQuestion } from '@/lib/actions/question.action';
+import { usePathname, useRouter } from 'next/navigation';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 
+interface Field {
+  name: string;
+  value: string[];
+}
+
 const type: any = 'Edit';
 
-function Question() {
+function Question({ mongoUserId }: { mongoUserId: string }) {
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+  const pathName = usePathname();
 
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
@@ -39,22 +44,23 @@ function Question() {
     },
   });
 
-  function handleTagsInputValue(e, field: any) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
+  function handleTagsInputValue(event: KeyboardEvent, field: Field): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
 
-      const tagInput = e.target as HTMLInputElement;
+      const tagInput = event.target as HTMLInputElement;
       const tagValue = tagInput.value.trim();
 
       if (tagValue !== '' && field.name === 'tags') {
         if (tagValue.length > 15) {
-          return form.setError('tags', {
+          form.setError('tags', {
             type: 'required',
             message: 'Tag must be less than 15 characters',
           });
+          return;
         }
 
-        if (!field.value.includes(tagValue as never)) {
+        if (!field.value.includes(tagValue)) {
           form.setValue('tags', [...field.value, tagValue]);
           tagInput.value = '';
           form.clearErrors('tags');
@@ -63,7 +69,6 @@ function Question() {
         }
       }
     }
-    return null;
   }
 
   function handleTagRemove(tag: string, field: any) {
@@ -76,8 +81,18 @@ function Question() {
   async function onSubmit(values: z.infer<typeof QuestionSchema>) {
     setIsSubmitting(true);
     try {
-      await createQuestion({});
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        author: JSON.parse(mongoUserId),
+        tags: values.tags,
+        path: pathName,
+      });
+
+      router.push('/');
+      form.reset();
     } catch (error) {
+      console.log(error);
     } finally {
       setIsSubmitting(false);
     }
@@ -110,6 +125,7 @@ function Question() {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name='explanation'
@@ -163,6 +179,7 @@ function Question() {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name='tags'
@@ -209,6 +226,7 @@ function Question() {
             </FormItem>
           )}
         />
+
         <Button
           type='submit'
           className='primary-gradient w-fit !text-light-900'

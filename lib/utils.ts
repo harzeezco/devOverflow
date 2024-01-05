@@ -17,8 +17,8 @@ export function metricsData(
       imgSrc: '/assets/icons/avatar.svg',
       alt: 'user',
       title: ' - asked 1 hour ago',
-      value: author.name,
-      href: `/profile/${author._id}`,
+      value: author?.name,
+      href: `/profile/${author?._id}`,
       textStyles: 'body-mediumv text-dark400_light700',
       isAuthor: true,
     },
@@ -35,7 +35,7 @@ export function metricsData(
       imgSrc: '/assets/icons/message.svg',
       alt: 'message',
       title: 'Answers',
-      value: answers.length,
+      value: answers?.length,
       href: '',
       textStyles: 'small-medium text-dark400_light800',
       isAuthor: false,
@@ -54,7 +54,7 @@ export function metricsData(
 
 export const getTimestamp = (createdAt: Date): string => {
   const now = new Date();
-  const timeDifference = now.getTime() - createdAt.getTime();
+  const timeDifference = now.getTime() - createdAt?.getTime();
 
   const seconds = Math.floor(timeDifference / 1000);
   const minutes = Math.floor(seconds / 60);
@@ -85,5 +85,5 @@ export const formatNumber = (num: number): string => {
   if (absNum >= 1e3) {
     return `${num / 1e3}K`;
   }
-  return num.toString();
+  return num?.toString();
 };

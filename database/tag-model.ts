@@ -2,7 +2,7 @@ import { Schema, Document, models, model } from 'mongoose';
 
 export interface ITag extends Document {
   name: string;
-  description: Schema.Types.ObjectId[];
+  description: string;
   questions: Schema.Types.ObjectId[];
   followers: Schema.Types.ObjectId[];
   createdOn: Date;

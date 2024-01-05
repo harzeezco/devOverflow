@@ -7,50 +7,12 @@ import FilterSearch from '@/components/shared/filter-search';
 import Filters from '@/components/home/filter';
 import NoResultFound from '@/components/shared/no-result-found';
 import QuestionCard from '@/components/cards/question-card';
+import { getQuestions } from '@/lib/actions/question-action';
 
-const Questions = [
-  {
-    id: '1',
-    title: 'Cascading Deletes in  SQLAlchemy',
-    tags: [
-      { _id: '1', value: 'python' },
-      { _id: '2', value: 'sql' },
-    ],
-    author: { _id: '1', name: 'John Doe', picture: 'john.png' },
-    upvotes: 10,
-    views: 100,
-    answers: [],
-    createdAt: new Date('2021-09-01T12:00:00.000Z'),
-  },
-  {
-    id: '2',
-    title: 'Cascading Deletes in  SQLAlchemy',
-    tags: [
-      { _id: '1', value: 'python' },
-      { _id: '2', value: 'sql' },
-    ],
-    author: { _id: '1', name: 'John Doe', picture: 'john.png' },
-    upvotes: 10,
-    views: 100,
-    answers: [],
-    createdAt: new Date('2021-09-01T12:00:00.000Z'),
-  },
-  {
-    id: '3',
-    title: 'Cascading Deletes in  SQLAlchemy',
-    tags: [
-      { _id: '1', value: 'python' },
-      { _id: '2', value: 'sql' },
-    ],
-    author: { _id: '1', name: 'John Doe', picture: 'john.png' },
-    upvotes: 10,
-    views: 100000,
-    answers: [],
-    createdAt: new Date('2023-09-01T12:00:00.000Z'),
-  },
-];
+export default async function Home() {
+  const data = await getQuestions({});
+  // console.log(data.questions);
 
-export default function Home() {
   return (
     <div className=''>
       <div className='mb-5 flex w-full flex-col-reverse justify-between gap-4 overflow-y-auto sm:flex-row sm:items-center'>
@@ -79,10 +41,12 @@ export default function Home() {
         <Filters />
       </div>
       <div className='mt-10 flex w-full flex-col gap-6'>
-        {Questions.length > 0 ? (
-          Questions.map((details) => (
-            <QuestionCard key={details.id} {...details} />
-          ))
+        {data.questions.length > 0 ? (
+          data.questions.map((details) => {
+            console.log(details);
+
+            return <QuestionCard key={details.id} details={details} />;
+          })
         ) : (
           <NoResultFound
             title='There’s no question to show'

@@ -3,12 +3,12 @@ import React from 'react';
 import TagsFilter from '../tags-filter';
 
 function Filters() {
-  const active = 'newest';
+  const active = 'Newest';
 
   return (
     <ul className='flex gap-4 max-md:hidden'>
       {HomePageFilters.map((details) => (
-        <TagsFilter key={details.value} active={active} {...details} />
+        <TagsFilter key={details.value} active={active} tag={details} />
       ))}
     </ul>
   );

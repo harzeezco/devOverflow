@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import TagsFilter from '@/components/home/tags-filter';
 import Metric from '@/components/shared/metric';
@@ -24,15 +23,10 @@ type QuestionProps = {
 };
 
 function QuestionCard({
-  id,
-  title,
-  tags,
-  author,
-  upvotes,
-  views,
-  answers,
-  createdAt,
+details
 }: QuestionProps) {
+  const { id, title, tags, author, upvotes, views, answers, createdAt } = details;
+
   const getMetrics = metricsData(author, upvotes, answers, views);
 
   return (
@@ -51,9 +45,7 @@ function QuestionCard({
       </div>
 
       <ul className='flex items-center gap-4'>
-        {tags.map((details) => (
-          <TagsFilter key={details._id} {...details} />
-        ))}
+        {tags?.map((tag) => <TagsFilter key={details._id} tag={tag} />)}
       </ul>
 
       <div className='flex-between mt-6 w-full gap-1'>
